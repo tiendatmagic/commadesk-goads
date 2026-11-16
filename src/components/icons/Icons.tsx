@@ -98,15 +98,56 @@ export function SmartLedIcon({ size = 20, className = '', ...props }: IconProps)
   );
 }
 
+/** LEDBike - Xe máy gắn màn hình LED thông minh chuẩn GOADS */
+export function BikeLedIcon({ size = 20, className = '', ...props }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}>
+      <circle cx="5.5" cy="17" r="3"></circle>
+      <circle cx="18.5" cy="17" r="3"></circle>
+      <path d="M15 6h2.5"></path>
+      <path d="M16 6l-3.5 7h-4"></path>
+      <path d="M8.5 13l-3 4"></path>
+      <path d="M12.5 13l6 4"></path>
+      <rect x="3" y="7" width="5.5" height="5" rx="1" fill="currentColor" fillOpacity="0.25"></rect>
+      <path d="M4 9h3.5"></path>
+      <path d="M4 11h2"></path>
+    </svg>
+  );
+}
+
 /** Đội Xe Roadshow & Xe 4 Bánh Mobile Billboard */
 export function RoadshowIcon({ size = 20, className = '', ...props }: IconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}>
-      <rect x="1" y="4" width="22" height="11" rx="2"></rect>
+      <rect x="2" y="5" width="13" height="10" rx="1.5"></rect>
+      <path d="M15 8h4.5l2.5 3.5v3.5h-2"></path>
       <circle cx="6" cy="18" r="2"></circle>
-      <circle cx="18" cy="18" r="2"></circle>
-      <path d="M8 18h8"></path>
-      <line x1="1" y1="9" x2="23" y2="9"></line>
+      <circle cx="17.5" cy="18" r="2"></circle>
+      <path d="M8 18h7.5"></path>
+      <path d="M2 18h2"></path>
+      <line x1="5" y1="9" x2="12" y2="9"></line>
+    </svg>
+  );
+}
+
+/** Hệ Thống Quản Lý Chiến Dịch & Dashboard Đo Lường AI */
+export function AiDashboardIcon({ size = 20, className = '', ...props }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}>
+      <rect x="2" y="3" width="20" height="14" rx="2"></rect>
+      <line x1="8" y1="21" x2="16" y2="21"></line>
+      <line x1="12" y1="17" x2="12" y2="21"></line>
+      <path d="M6 10l3-3 3 3 5-5"></path>
+      <circle cx="17" cy="5" r="1" fill="currentColor"></circle>
+    </svg>
+  );
+}
+
+/** Mũi tên điều hướng nhỏ (Chevron Right) */
+export function ChevronRightIcon({ size = 16, className = '', ...props }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}>
+      <polyline points="9 18 15 12 9 6"></polyline>
     </svg>
   );
 }

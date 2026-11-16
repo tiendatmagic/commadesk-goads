@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 
@@ -31,6 +31,7 @@ export interface AntigravityProps {
   intro?: boolean;
   lightMode?: boolean;
   opacity?: number;
+  capsuleHeightRatio?: number;
   maxDevicePixelRatio?: number;
   className?: string;
   style?: CSSProperties;
@@ -62,6 +63,7 @@ interface Settings {
   intro: boolean;
   light: boolean;
   opacity: number;
+  capsuleRatio: number;
   maxRatio: number;
 }
 
@@ -98,7 +100,7 @@ interface Field {
 const PIXEL_BUDGET = 2.4e6;
 const WORLD_HEIGHT = 31.5;
 const PALETTE_SIZE = 256;
-const DEFAULT_COLORS = ['#5227FF', '#FF9FFC', '#B497CF'];
+const DEFAULT_COLORS = ['#ff6400', '#ff8533', '#ffa666'];
 const SHAPES: Record<Shape, number> = { capsule: 0, sphere: 1, box: 2, tetrahedron: 3 };
 const COLOR_MODES: Record<ColorMode, number> = { conic: 0, radial: 1, random: 2 };
 
@@ -125,6 +127,7 @@ uniform float uHue;
 uniform float uReveal;
 uniform float uStreak;
 uniform float uCharge;
+uniform float uCapsuleRatio;
 out vec2 vLocal;
 out vec2 vBounds;
 out float vU;
@@ -151,7 +154,7 @@ void main() {
   vec2 bounds;
   if (uShape < 0.5) {
     float width = size * 0.17 * mix(0.55, 1.0, ring);
-    bounds = vec2(max(width, size * 0.5 * grow) * (1.0 + streak * 1.2), width);
+    bounds = vec2(max(width, size * 0.5 * uCapsuleRatio * grow) * (1.0 + streak * 0.6 * uCapsuleRatio), width);
   } else if (uShape < 1.5) {
     bounds = vec2(size * 0.22 * mix(0.45, 1.0, grow));
   } else {
@@ -351,7 +354,7 @@ const finish = (gl: WebGL2RenderingContext, { program, vertex, fragment }: Linki
   return { program, uniforms };
 };
 
-const retire = (gl: WebGL2RenderingContext, parallel: KHR_parallel_shader_compile | null, linking: Linking): void => {
+const retire = (gl: WebGL2RenderingContext, parallel: any, linking: Linking): void => {
   if (parallel && gl.getProgramParameter(linking.program, parallel.COMPLETION_STATUS_KHR) === false) {
     requestAnimationFrame(() => retire(gl, parallel, linking));
     return;
@@ -361,33 +364,34 @@ const retire = (gl: WebGL2RenderingContext, parallel: KHR_parallel_shader_compil
   gl.deleteProgram(linking.program);
 };
 
-const Antigravity = ({
-  count = 1500,
-  magnetRadius = 9,
-  ringRadius = 7,
-  waveSpeed = 0.4,
-  waveAmplitude = 1,
+export const Antigravity = ({
+  count = 220,
+  magnetRadius = 8,
+  ringRadius = 6,
+  waveSpeed = 0.35,
+  waveAmplitude = 0.8,
   waveCount = 3,
-  particleSize = 0.9,
+  particleSize = 1.2,
   lerpSpeed = 0.05,
   color,
   colors = DEFAULT_COLORS,
   colorMode = 'conic',
-  colorSpeed = 0.05,
+  colorSpeed = 0.04,
   autoAnimate = true,
-  particleVariance = 1,
-  rotationSpeed = 0,
-  depthFactor = 1,
-  pulseSpeed = 3,
+  particleVariance = 0.8,
+  rotationSpeed = 0.05,
+  depthFactor = 0.8,
+  pulseSpeed = 2.5,
   particleShape = 'capsule',
-  fieldStrength = 10,
-  ambient = 0.25,
+  fieldStrength = 8,
+  ambient = 0.45,
   interactive = true,
-  clickBurst = true,
-  intro = true,
-  lightMode = false,
-  opacity = 1,
-  maxDevicePixelRatio = 2,
+  clickBurst = false,
+  intro = false,
+  lightMode = true,
+  opacity = 0.9,
+  capsuleHeightRatio = 0.55,
+  maxDevicePixelRatio = 1.25,
   className = '',
   style
 }: AntigravityProps) => {
@@ -395,10 +399,25 @@ const Antigravity = ({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const wakeRef = useRef<(() => void) | null>(null);
   const [generation, setGeneration] = useState(0);
+  const [mounted, setMounted] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  // Tối ưu chống lag mobile: Chỉ kích hoạt trên màn hình desktop/tablet (>= 768px)
+  useEffect(() => {
+    setMounted(true);
+    const mql = window.matchMedia('(min-width: 768px)');
+    setIsDesktop(mql.matches);
+    const onChange = (e: MediaQueryListEvent) => {
+      setIsDesktop(e.matches);
+    };
+    mql.addEventListener('change', onChange);
+    return () => mql.removeEventListener('change', onChange);
+  }, []);
+
   const palette = color ? [color] : Array.isArray(colors) && colors.length ? colors : DEFAULT_COLORS;
 
   const settings: Settings = {
-    count: clamp(Math.round(count), 1, 20000),
+    count: clamp(Math.round(count), 1, 5000),
     magnet: Math.max(0, magnetRadius),
     ring: Math.max(0, ringRadius),
     waveSpeed,
@@ -423,7 +442,8 @@ const Antigravity = ({
     intro,
     light: lightMode,
     opacity: clamp(opacity, 0, 1),
-    maxRatio: clamp(maxDevicePixelRatio, 0.5, 3)
+    capsuleRatio: clamp(capsuleHeightRatio, 0.15, 3.0),
+    maxRatio: clamp(maxDevicePixelRatio, 0.5, 2)
   };
   const settingsRef = useRef(settings);
   settingsRef.current = settings;
@@ -433,6 +453,7 @@ const Antigravity = ({
   });
 
   useEffect(() => {
+    if (!isDesktop) return;
     const container = containerRef.current;
     const canvas = canvasRef.current;
     if (!container || !canvas) return;
@@ -450,7 +471,7 @@ const Antigravity = ({
     let shader = gl && linking && !parallel ? finish(gl, linking) : null;
     if (!gl || !linking || (!parallel && !shader)) return;
 
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const reduced = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const vao = gl.createVertexArray();
     gl.bindVertexArray(vao);
     const cornerBuffer = gl.createBuffer();
@@ -488,7 +509,7 @@ const Antigravity = ({
     let raf = 0;
     let last = 0;
     let visible = true;
-    let pageVisible = document.visibilityState !== 'hidden';
+    let pageVisible = typeof document !== 'undefined' && document.visibilityState !== 'hidden';
     let lost = false;
 
     const updatePalette = (s: Settings) => {
@@ -509,6 +530,45 @@ const Antigravity = ({
     };
 
     const buildField = (total: number, width: number, height: number, previous: Field | null): Field => {
+      // Khi đã có trường hạt trước đó và cùng số lượng (xảy ra khi resize màn hình / bấm F12):
+      // Giữ nguyên 100% vị trí gốc (homeX, homeY) và chỉ co giãn tọa độ mượt mà theo tỷ lệ mới,
+      // triệt tiêu quán tính cũ để hạt KHÔNG bị nhảy vị trí ngẫu nhiên hay bắn hỗn loạn.
+      if (previous && previous.total === total && previous.width > 0 && previous.height > 0) {
+        const scaleX = width / previous.width;
+        const scaleY = height / previous.height;
+        const next: Field = {
+          total,
+          width,
+          height,
+          homeX: new Float32Array(total),
+          homeY: new Float32Array(total),
+          band: previous.band,
+          phase: previous.phase,
+          agility: previous.agility,
+          delay: previous.delay,
+          orbit: previous.orbit,
+          x: new Float32Array(total),
+          y: new Float32Array(total),
+          vx: new Float32Array(total),
+          vy: new Float32Array(total),
+          particles: new Float32Array(total * 4),
+          seeds: previous.seeds
+        };
+        for (let index = 0; index < total; index++) {
+          next.homeX[index] = previous.homeX[index] * scaleX;
+          next.homeY[index] = previous.homeY[index] * scaleY;
+          next.x[index] = previous.x[index] * scaleX;
+          next.y[index] = previous.y[index] * scaleY;
+          next.vx[index] = previous.vx[index] * 0.1;
+          next.vy[index] = previous.vy[index] * 0.1;
+        }
+        gl.bindBuffer(gl.ARRAY_BUFFER, seedBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, next.seeds, gl.STATIC_DRAW);
+        gl.bindBuffer(gl.ARRAY_BUFFER, particleBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, next.particles.byteLength, gl.DYNAMIC_DRAW);
+        return next;
+      }
+
       const rand = random(1337);
       const margin = 0.06;
       const spanX = width * (1 + margin * 2);
@@ -549,16 +609,8 @@ const Antigravity = ({
         next.phase[index] = rand() * Math.PI * 2;
         next.agility[index] = 0.75 + rand() * 0.5;
         next.delay[index] = rand();
-        if (previous && index < previous.total) {
-          next.x[index] = (previous.x[index] / previous.width) * width;
-          next.y[index] = (previous.y[index] / previous.height) * height;
-          next.vx[index] = previous.vx[index];
-          next.vy[index] = previous.vy[index];
-          next.orbit[index] = previous.orbit[index];
-        } else {
-          next.x[index] = hx;
-          next.y[index] = introClock === 0 ? hy + height * (0.45 + next.delay[index] * 0.4) : hy;
-        }
+        next.x[index] = hx;
+        next.y[index] = introClock === 0 ? hy + height * (0.45 + next.delay[index] * 0.4) : hy;
         next.seeds[index * 4] = depths[index];
         next.seeds[index * 4 + 1] = next.phase[index];
         next.seeds[index * 4 + 2] = rand();
@@ -578,7 +630,7 @@ const Antigravity = ({
       const cssWidth = Math.max(1, rect.width);
       const cssHeight = Math.max(1, rect.height);
       const ratio = Math.min(
-        window.devicePixelRatio || 1,
+        (typeof window !== 'undefined' ? window.devicePixelRatio : 1) || 1,
         s.maxRatio,
         Math.sqrt(PIXEL_BUDGET / (cssWidth * cssHeight))
       );
@@ -595,6 +647,15 @@ const Antigravity = ({
         cursor.x = cursor.tx = cssWidth / 2;
         cursor.y = cursor.ty = cssHeight / 2;
         cursor.ready = true;
+      } else {
+        // Khi resize màn hình (F12 hoặc đổi kích thước cửa sổ):
+        // Giới hạn tọa độ cursor không bị vượt ra ngoài biên mới, đồng thời triệt tiêu vận tốc dư thừa của chuột
+        cursor.x = clamp(cursor.x, 0, cssWidth);
+        cursor.y = clamp(cursor.y, 0, cssHeight);
+        cursor.tx = clamp(cursor.tx, 0, cssWidth);
+        cursor.ty = clamp(cursor.ty, 0, cssHeight);
+        cursor.vx = 0;
+        cursor.vy = 0;
       }
       if (
         !field ||
@@ -655,9 +716,16 @@ const Antigravity = ({
         const stiffness = omega * omega;
         const steps = Math.min(4, Math.max(1, Math.ceil(omega * dt * 2)));
         const h = dt / steps;
+        const maxV = unit * 45; // Giới hạn vận tốc cực đại (velocity clamp) để các hạt không bao giờ bị bắn văng khi resize đột ngột
         for (let step = 0; step < steps; step++) {
           vx[index] += ((tx - x[index]) * stiffness - vx[index] * damping) * h;
           vy[index] += ((ty - y[index]) * stiffness - vy[index] * damping) * h;
+          const curV = Math.sqrt(vx[index] * vx[index] + vy[index] * vy[index]);
+          if (curV > maxV) {
+            const factor = maxV / curV;
+            vx[index] *= factor;
+            vy[index] *= factor;
+          }
           x[index] += vx[index] * h;
           y[index] += vy[index] * h;
         }
@@ -669,7 +737,7 @@ const Antigravity = ({
     };
 
     const burst = (s: Settings, strength: number) => {
-      if (!field) return;
+      if (!field || !s.clickBurst) return;
       const unit = size.height / WORLD_HEIGHT;
       const reach = Math.max(s.magnet, s.ring) * unit * 1.8;
       const { x, y, vx, vy, agility, total } = field;
@@ -711,7 +779,7 @@ const Antigravity = ({
       time += dt * pace;
       hue += dt * s.colorSpeed * pace;
       if (introClock < 3) introClock += dt;
-      charge = pointer.down ? Math.min(1, charge + dt / 0.9) : Math.max(0, charge - dt * 4);
+      charge = pointer.down && s.clickBurst ? Math.min(1, charge + dt / 0.9) : Math.max(0, charge - dt * 4);
 
       const idle = performance.now() - pointer.moved > 2000 || !pointer.inside;
       if (s.autoAnimate && !reduced && (idle || !s.interactive)) {
@@ -761,6 +829,7 @@ const Antigravity = ({
       gl.uniform1f(u.uStreak, unit * 30);
       gl.uniform1f(u.uCharge, charge);
       gl.uniform1f(u.uOpacity, s.opacity);
+      gl.uniform1f(u.uCapsuleRatio, s.capsuleRatio);
       gl.drawArraysInstanced(gl.TRIANGLE_STRIP, 0, 4, field.total);
 
       if (visible && pageVisible) raf = requestAnimationFrame(frame);
@@ -808,7 +877,7 @@ const Antigravity = ({
       if (s.clickBurst && !reduced) pointer.down = true;
     };
     const onPointerUp = (event: PointerEvent) => {
-      if (pointer.down) burst(settingsRef.current, 0.45 + charge);
+      if (pointer.down && settingsRef.current.clickBurst) burst(settingsRef.current, 0.45 + charge);
       pointer.down = false;
       if (event.pointerType !== 'mouse') pointer.inside = false;
     };
@@ -845,7 +914,7 @@ const Antigravity = ({
     intersection.observe(container);
 
     const onVisibility = () => {
-      pageVisible = document.visibilityState !== 'hidden';
+      pageVisible = typeof document !== 'undefined' && document.visibilityState !== 'hidden';
       wake();
     };
     document.addEventListener('visibilitychange', onVisibility);
@@ -876,14 +945,17 @@ const Antigravity = ({
         else if (!lost) retire(gl, parallel, linking);
       }
     };
-  }, [generation]);
+  }, [generation, isDesktop]);
+
+  if (!mounted || !isDesktop) {
+    return null;
+  }
 
   return (
-    <div ref={containerRef} className={`relative h-full w-full overflow-hidden ${className}`.trim()} style={style}>
-      <canvas ref={canvasRef} className="absolute inset-0 block h-full w-full" aria-hidden="true" />
+    <div ref={containerRef} className={`relative h-full w-full overflow-hidden transform-gpu ${className}`.trim()} style={{ willChange: 'transform', ...style }}>
+      <canvas ref={canvasRef} className="absolute inset-0 block h-full w-full transform-gpu" style={{ willChange: 'transform' }} aria-hidden="true" />
     </div>
   );
 };
 
 export default Antigravity;
-

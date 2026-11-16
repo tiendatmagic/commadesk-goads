@@ -26,7 +26,7 @@ export function HotlineBanner({
 }: HotlineBannerProps) {
   return (
     <div
-      className={`flex items-center gap-3.5 bg-[#fff8f2] border border-[#ffdecb] rounded-xl p-3 px-4 transition-all duration-300 hover:border-[#ff6400]/60 hover:bg-[#fff3eb] hover:shadow-xs ${className}`}
+      className={`flex items-center gap-3.5 bg-[#fff8f2]/60 backdrop-blur-[6px] border border-[#ffdecb]/85 rounded-2xl p-3 px-4 transition-colors duration-150 hover:border-[#ff6400]/60 hover:bg-[#fff8f2]/85 shadow-xs ${className}`}
     >
       <div className="w-10 h-10 rounded-full bg-[#ff6400] text-white flex items-center justify-center text-lg shrink-0 shadow-[0_2px_8px_rgba(255,100,0,0.28)]">
         <PhoneIcon size={18} />

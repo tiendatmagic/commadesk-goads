@@ -39,12 +39,12 @@ export const metadata: Metadata = {
     'AI Camera quảng cáo',
     'Đo lường tiếp cận',
     'CommaDesk Custom Login',
-    'GOADS Portal',
+    'GOADS.VN',
   ],
   authors: [{ name: 'CÔNG TY CỔ PHẦN CÔNG NGHỆ TRUYỀN THÔNG GOADS' }],
   creator: 'CÔNG TY CỔ PHẦN CÔNG NGHỆ TRUYỀN THÔNG GOADS',
   publisher: 'GOADS Media Technology',
-  applicationName: 'GOADS Enterprise Portal',
+  applicationName: 'GOADS Media Technology',
   category: 'Outdoor Advertising & Media Technology',
   classification: 'Smart OOH & Mobile LED Campaign Management System',
   formatDetection: {
@@ -111,7 +111,7 @@ export const metadata: Metadata = {
     creator: '@GoadsVietnam',
   },
   other: {
-    'apple-mobile-web-app-title': 'GOADS Portal',
+    'apple-mobile-web-app-title': 'GOADS',
     'apple-mobile-web-app-capable': 'yes',
     'apple-mobile-web-app-status-bar-style': 'black-translucent',
     'mobile-web-app-capable': 'yes',
@@ -136,8 +136,8 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="1024x1024" href="./goads-favicon.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
         <link rel="manifest" href="./site.webmanifest" />
-        <meta name="apple-mobile-web-app-title" content="GOADS Portal" />
-        <meta name="application-name" content="GOADS Enterprise Portal" />
+        <meta name="apple-mobile-web-app-title" content="GOADS" />
+        <meta name="application-name" content="GOADS Media Technology" />
         <meta name="theme-color" content="#ff6400" />
       </head>
       <body className={roboto.className}>{children}</body>

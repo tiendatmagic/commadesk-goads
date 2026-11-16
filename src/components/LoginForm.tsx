@@ -2,18 +2,12 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import {
-  GoadsFormLogo,
-  GoadsIcon,
-  UserIcon,
-  LockIcon,
   EyeIcon,
   EyeOffIcon,
   MailIcon,
   ShieldCheckIcon,
   AlertCircleIcon,
 } from './icons/Icons';
-import { Button } from './ui/Button';
-import { InputAffix } from './ui/InputAffix';
 import { HotlineBanner } from './ui/HotlineBanner';
 import { setupMockBridgeIfNeeded } from '@/utils/mockBridge';
 import { CommaDeskLoginState } from '@/types/commadesk';
@@ -23,6 +17,7 @@ export default function LoginForm() {
   const [password, setPassword] = useState('');
   const [otp, setOtp] = useState('');
   const [emailSpecific, setEmailSpecific] = useState('');
+  const [rememberMe, setRememberMe] = useState(true);
 
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -113,7 +108,7 @@ export default function LoginForm() {
       await window.CommaDeskLogin?.login({
         username: username.trim(),
         password: password,
-        rememberMe: true,
+        rememberMe: rememberMe,
       });
     } catch {}
   };
@@ -148,205 +143,246 @@ export default function LoginForm() {
         username: username.trim(),
         password: password,
         emailSpecific: cleanEmail,
-        rememberMe: true,
+        rememberMe: rememberMe,
       });
     } catch {}
   };
 
   return (
-    <div className="bg-white flex items-center justify-center p-6 sm:p-10 xl:p-14 relative overflow-y-auto min-h-screen lg:min-h-0">
-      <div className="w-full max-w-[420px] animate-fade-slide-up">
-        {/* Khối Logo GOADS Media Technology */}
-        <GoadsFormLogo className="mb-6 w-full" />
+    <div className="relative w-full max-w-[520px] xl:max-w-[540px]">
+      {/* Thẻ Card Kính Mờ Chuẩn Glassmorphism (Background Opacity 0.6 & Backdrop Blur 6px) */}
+      <div className="w-full bg-white/60 backdrop-blur-[6px] rounded-3xl p-7 sm:p-10 md:p-12 shadow-[0_20px_60px_rgba(0,28,76,0.07),_0_10px_32px_rgba(255,100,0,0.14),_inset_0_1px_2px_rgba(255,255,255,0.95)] border border-white/85 transform-gpu">
+        {/* 1. Logo Thương Hiệu GOADS Chính Thức */}
+      <img
+        src="./assets/images/GoadsLogo.png"
+        alt="GOADS Media Technology - goads.vn"
+        className="mb-6 sm:mb-8 h-[46px] w-auto sm:h-[58px] md:h-[68px] min-[1200px]:h-[74px] object-contain"
+      />
 
-        {/* Tiêu đề Cổng Đăng Nhập */}
-        <div className="mb-7 text-center sm:text-left">
-          <h2 className="text-[26px] font-extrabold text-[#0f172a] tracking-tight mb-1.5">
-            Cổng Đăng Nhập
-          </h2>
-          <p className="text-sm text-[#64748b]">
-            Hệ thống quản trị và điều phối chiến dịch quảng cáo GOADS Media Technology
-          </p>
-        </div>
+      {/* 2. Tiêu Đề Chào Mừng */}
+      <div className="mb-6 sm:mb-8">
+        <h1 className="text-[26px] xs:text-2xl sm:text-[32px] min-[1200px]:text-[36px] font-extrabold leading-tight text-[#001C4C] tracking-tight">
+          Chào mừng trở lại!
+        </h1>
+        <p className="mt-2 text-xs sm:text-[15px] leading-snug text-[#001C4C]/75">
+          CÔNG TY CỔ PHẦN CÔNG NGHỆ TRUYỀN THÔNG GOADS
+        </p>
+      </div>
 
-        {/* Khung Thông Báo Lỗi */}
-        <div
-          id="error"
-          className="text-[#e11d48] bg-[#fff0f2] border border-[#ffd0d4] rounded-xl p-3 text-sm leading-snug flex items-start gap-2.5 mb-5 shadow-xs"
-          hidden={!errorMsg}
-          role="alert"
-        >
-          <AlertCircleIcon size={18} className="shrink-0 mt-0.5" />
-          <span>{errorMsg}</span>
-        </div>
+      {/* 3. Khung Thông Báo Lỗi */}
+      <div
+        id="error"
+        className="text-[#e11d48] bg-[#fff0f2] border border-[#ffd0d4] rounded-xl p-3.5 text-xs sm:text-sm leading-snug flex items-start gap-2.5 mb-5 shadow-xs"
+        hidden={!errorMsg}
+        role="alert"
+      >
+        <AlertCircleIcon size={18} className="shrink-0 mt-0.5 text-[#e11d48]" />
+        <span>{errorMsg}</span>
+      </div>
 
-        {/* 1. Form Đăng Nhập Chính */}
-        <form
-          id="login-form"
-          onSubmit={handleLoginSubmit}
-          hidden={currentPanel !== 'login'}
-          noValidate
-          className="flex flex-col gap-5"
-        >
-          <InputAffix
+      {/* 4. Form Đăng Nhập Chính */}
+      <form
+        id="login-form"
+        onSubmit={handleLoginSubmit}
+        hidden={currentPanel !== 'login'}
+        noValidate
+        className="flex flex-col"
+      >
+        {/* Trường nhập Tài khoản */}
+        <div>
+          <label htmlFor="username" className="block text-xs sm:text-sm font-bold text-[#001C4C] mb-1.5">
+            Tài khoản / Email công vụ <span className="text-[#FF6400]">*</span>
+          </label>
+          <input
             id="username"
             name="username"
             type="text"
-            label="Tài khoản / Email công vụ"
-            requiredMark
-            prefixIcon={<UserIcon size={18} />}
+            className="w-full rounded-xl border border-[#E4E4E4] bg-white/75 focus:bg-white px-3.5 sm:px-4 py-3 text-sm sm:text-[15px] text-[#001C4C] outline-none placeholder:text-[#B0B0B0] focus:border-[#FF6400] focus:ring-2 focus:ring-[#FF6400]/15 transition-colors duration-150"
             placeholder="Nhập tên đăng nhập hoặc email @goads.vn"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             autoComplete="username"
             required
           />
+        </div>
 
-          <InputAffix
-            id="password"
-            name="password"
-            type={showPassword ? 'text' : 'password'}
-            label="Mật khẩu"
-            requiredMark
-            prefixIcon={<LockIcon size={18} />}
-            placeholder="Nhập mật khẩu truy cập"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            autoComplete="current-password"
-            required
-            suffixAction={
-              <button
-                type="button"
-                id="toggle-password"
-                onClick={() => setShowPassword(!showPassword)}
-                aria-label={showPassword ? 'Ẩn mật khẩu' : 'Hiện mật khẩu'}
-                aria-pressed={showPassword}
-                className="bg-transparent border-0 cursor-pointer text-[#64748b] hover:text-[#ff6400] p-1 shrink-0 transition-colors"
-              >
-                {showPassword ? <EyeOffIcon size={18} /> : <EyeIcon size={18} />}
-              </button>
-            }
-          />
-
-          <Button
-            type="submit"
-            id="btn-login"
-            size="lg"
-            isLoading={isLoading}
-            loadingText="Đang xác thực bảo mật..."
-            leftIcon={<GoadsIcon size={18} className="drop-shadow-sm" />}
-            className="w-full mt-1"
-          >
-            <span id="btn-login-label">Đăng Nhập GOADS Portal</span>
-          </Button>
-
-          {/* Hotline hỗ trợ kỹ thuật GOADS */}
-          <div className="pt-2">
-            <HotlineBanner label="Hỗ Trợ Chiến Dịch & Kỹ Thuật 24/7" />
+        {/* Trường nhập Mật khẩu */}
+        <div className="mt-4">
+          <label htmlFor="password" className="block text-xs sm:text-sm font-bold text-[#001C4C] mb-1.5">
+            Mật khẩu <span className="text-[#FF6400]">*</span>
+          </label>
+          <div className="relative">
+            <input
+              id="password"
+              name="password"
+              type={showPassword ? 'text' : 'password'}
+              className="w-full rounded-xl border border-[#E4E4E4] bg-white/75 focus:bg-white px-3.5 sm:px-4 py-3 pr-12 text-sm sm:text-[15px] text-[#001C4C] outline-none placeholder:text-[#B0B0B0] focus:border-[#FF6400] focus:ring-2 focus:ring-[#FF6400]/15 transition-colors duration-150"
+              placeholder="Nhập mật khẩu truy cập"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete="current-password"
+              required
+            />
+            <button
+              type="button"
+              id="toggle-password"
+              aria-label={showPassword ? 'Ẩn mật khẩu' : 'Hiện mật khẩu'}
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#9AA0A6] hover:text-[#001C4C] p-1 transition-colors duration-150 cursor-pointer"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <EyeOffIcon size={20} /> : <EyeIcon size={20} />}
+            </button>
           </div>
+        </div>
+
+        {/* Ghi nhớ & Quên mật khẩu */}
+        <div className="mt-4 flex items-center justify-between text-xs sm:text-sm text-[#5C6570]">
+          <label className="flex items-center gap-2 cursor-pointer select-none">
+            <input
+              type="checkbox"
+              className="h-4 w-4 accent-[#FF6400] rounded cursor-pointer"
+              checked={rememberMe}
+              onChange={(e) => setRememberMe(e.target.checked)}
+            />
+            Ghi nhớ đăng nhập
+          </label>
+          <span className="cursor-pointer hover:text-[#FF6400] transition-colors duration-150">Quên mật khẩu?</span>
+        </div>
+
+        {/* Nút Submit CTA: Đổi thành "Đăng nhập" theo đúng yêu cầu */}
+        <button
+          type="submit"
+          id="btn-login"
+          disabled={isLoading}
+          className="mt-6 w-full rounded-xl bg-[#FF6400] py-3.5 text-base font-bold text-white shadow-[0_8px_20px_rgb(255_100_0_/_28%)] transition-[filter,transform] duration-150 ease-out hover:brightness-105 active:scale-[0.99] disabled:opacity-60 cursor-pointer flex items-center justify-center gap-2"
+        >
+          {isLoading ? (
+            <>
+              <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+              <span>Đang xác thực...</span>
+            </>
+          ) : (
+            <span id="btn-login-label">Đăng nhập</span>
+          )}
+        </button>
+
+        {/* Hotline hỗ trợ kỹ thuật */}
+        <div className="mt-6">
+          <HotlineBanner label="Hỗ Trợ Chiến Dịch &amp; Kỹ Thuật 24/7" />
+        </div>
+      </form>
+
+      {/* 5. Panel: requires_email */}
+      <div
+        id="email-box"
+        hidden={currentPanel !== 'email'}
+      >
+        <p className="text-[17px] font-bold text-[#001C4C] mb-1.5">Xác nhận email liên kết</p>
+        <p className="text-sm text-[#001C4C]/75 leading-relaxed mb-5">
+          Tài khoản này được gán cho nhiều chiến dịch quảng cáo hoặc cụm phương tiện. Vui lòng nhập email làm việc chính thức để tiếp tục.
+        </p>
+        <form onSubmit={handleEmailSubmit} className="flex flex-col gap-4">
+          <div>
+            <label htmlFor="emailSpecific" className="block text-xs sm:text-sm font-bold text-[#001C4C] mb-1.5">
+              Email công vụ GOADS <span className="text-[#FF6400]">*</span>
+            </label>
+            <div className="relative">
+              <input
+                id="emailSpecific"
+                name="emailSpecific"
+                type="email"
+                ref={emailInputRef}
+                className="w-full rounded-xl border border-[#E4E4E4] bg-[#FAFAFA] focus:bg-white px-3.5 sm:px-4 py-3 pl-10 text-sm sm:text-[15px] text-[#001C4C] outline-none placeholder:text-[#B0B0B0] focus:border-[#FF6400] focus:ring-2 focus:ring-[#FF6400]/15 transition"
+                placeholder="name@goads.vn"
+                value={emailSpecific}
+                onChange={(e) => setEmailSpecific(e.target.value)}
+                autoComplete="email"
+                required
+              />
+              <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#9AA0A6] pointer-events-none">
+                <MailIcon size={18} />
+              </div>
+            </div>
+          </div>
+          <button
+            type="submit"
+            id="btn-email"
+            disabled={isLoading}
+            className="w-full rounded-xl bg-[#FF6400] py-3.5 text-base font-bold text-white shadow-[0_8px_20px_rgb(255_100_0_/_28%)] transition-[filter,transform] duration-150 ease-out hover:brightness-105 active:scale-[0.99] cursor-pointer mt-1"
+          >
+            Tiếp tục
+          </button>
+          <button
+            type="button"
+            id="btn-email-back"
+            onClick={() => {
+              setErrorMsg('');
+              setCurrentPanel('login');
+            }}
+            className="w-full rounded-xl border border-[#E4E4E4] bg-white py-2.5 sm:py-3 text-sm font-semibold text-[#001C4C] hover:bg-[#F5F7FA] transition-colors duration-150 cursor-pointer"
+          >
+            Quay lại đăng nhập
+          </button>
         </form>
+      </div>
 
-        {/* 2. requires_email Form */}
-        <div
-          id="email-box"
-          className="animate-fade-slide-up"
-          hidden={currentPanel !== 'email'}
-        >
-          <p className="text-[17px] font-bold text-[#0f172a] mb-1.5">Xác nhận email liên kết</p>
-          <p className="text-sm text-[#64748b] leading-relaxed mb-5">
-            Tài khoản này được gán cho nhiều chiến dịch quảng cáo hoặc cụm phương tiện. Vui lòng nhập email làm việc chính thức để tiếp tục.
-          </p>
-          <form onSubmit={handleEmailSubmit} className="flex flex-col gap-4">
-            <InputAffix
-              id="emailSpecific"
-              name="emailSpecific"
-              type="email"
-              ref={emailInputRef}
-              label="Email công vụ GOADS"
-              requiredMark
-              prefixIcon={<MailIcon size={18} />}
-              placeholder="name@goads.vn"
-              value={emailSpecific}
-              onChange={(e) => setEmailSpecific(e.target.value)}
-              autoComplete="email"
-            />
-            <Button
-              type="submit"
-              id="btn-email"
-              size="lg"
-              isLoading={isLoading}
-              className="w-full mt-1"
-            >
-              Tiếp tục
-            </Button>
-            <Button
-              type="button"
-              id="btn-email-back"
-              variant="secondary"
-              onClick={() => {
-                setErrorMsg('');
-                setCurrentPanel('login');
-              }}
-              className="w-full"
-            >
-              Quay lại đăng nhập
-            </Button>
-          </form>
-        </div>
-
-        {/* 3. requires_2fa Form */}
-        <div
-          id="otp-box"
-          className="animate-fade-slide-up"
-          hidden={currentPanel !== 'otp'}
-        >
-          <p className="text-[17px] font-bold text-[#0f172a] mb-1.5">Xác thực 2 bước (2FA)</p>
-          <p className="text-sm text-[#64748b] leading-relaxed mb-5">
-            Vui lòng nhập mã bảo mật OTP 6 chữ số từ ứng dụng xác thực của quản trị viên (Google Authenticator / Microsoft Authenticator).
-          </p>
-          <form onSubmit={handleOtpSubmit} className="flex flex-col gap-4">
-            <InputAffix
-              id="otp"
-              name="otp"
-              type="text"
-              inputMode="numeric"
-              pattern="[0-9]*"
-              maxLength={6}
-              ref={otpInputRef}
-              label="Mã OTP 6 số"
-              requiredMark
-              prefixIcon={<ShieldCheckIcon size={18} />}
-              placeholder="000000"
-              value={otp}
-              onChange={(e) => setOtp(e.target.value)}
-              autoComplete="one-time-code"
-              className="tracking-widest font-semibold"
-            />
-            <Button
-              type="submit"
-              id="btn-otp"
-              size="lg"
-              isLoading={isLoading}
-              loadingText="Đang kiểm tra OTP..."
-              className="w-full mt-1"
-            >
-              Xác nhận mã bảo mật
-            </Button>
-            <Button
-              type="button"
-              id="btn-otp-back"
-              variant="secondary"
-              onClick={() => {
-                setErrorMsg('');
-                setCurrentPanel('login');
-              }}
-              className="w-full"
-            >
-              Quay lại đăng nhập
-            </Button>
-          </form>
-        </div>
+      {/* 6. Panel: requires_2fa */}
+      <div
+        id="otp-box"
+        hidden={currentPanel !== 'otp'}
+      >
+        <p className="text-[17px] font-bold text-[#001C4C] mb-1.5">Xác thực 2 bước (2FA)</p>
+        <p className="text-sm text-[#001C4C]/75 leading-relaxed mb-5">
+          Vui lòng nhập mã bảo mật OTP 6 chữ số từ ứng dụng xác thực của quản trị viên (Google Authenticator / Microsoft Authenticator).
+        </p>
+        <form onSubmit={handleOtpSubmit} className="flex flex-col gap-4">
+          <div>
+            <label htmlFor="otp" className="block text-xs sm:text-sm font-bold text-[#001C4C] mb-1.5">
+              Mã OTP 6 số <span className="text-[#FF6400]">*</span>
+            </label>
+            <div className="relative">
+              <input
+                id="otp"
+                name="otp"
+                type="text"
+                inputMode="numeric"
+                pattern="[0-9]*"
+                maxLength={6}
+                ref={otpInputRef}
+                className="w-full rounded-xl border border-[#E4E4E4] bg-[#FAFAFA] focus:bg-white px-3.5 sm:px-4 py-3 pl-10 text-sm sm:text-[15px] text-[#001C4C] tracking-widest font-semibold outline-none placeholder:text-[#B0B0B0] focus:border-[#FF6400] focus:ring-2 focus:ring-[#FF6400]/15 transition-colors duration-150"
+                placeholder="000000"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+                autoComplete="one-time-code"
+                required
+              />
+              <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#9AA0A6] pointer-events-none">
+                <ShieldCheckIcon size={18} />
+              </div>
+            </div>
+          </div>
+          <button
+            type="submit"
+            id="btn-otp"
+            disabled={isLoading}
+            className="w-full rounded-xl bg-[#FF6400] py-3.5 text-base font-bold text-white shadow-[0_8px_20px_rgb(255_100_0_/_28%)] transition-[filter,transform] duration-150 ease-out hover:brightness-105 active:scale-[0.99] cursor-pointer mt-1"
+          >
+            {isLoading ? 'Đang kiểm tra OTP...' : 'Xác nhận mã bảo mật'}
+          </button>
+          <button
+            type="button"
+            id="btn-otp-back"
+            onClick={() => {
+              setErrorMsg('');
+              setCurrentPanel('login');
+            }}
+            className="w-full rounded-xl border border-[#E4E4E4] bg-white py-2.5 sm:py-3 text-sm font-semibold text-[#001C4C] hover:bg-[#F5F7FA] transition-colors duration-150 cursor-pointer"
+          >
+            Quay lại đăng nhập
+          </button>
+        </form>
       </div>
     </div>
-  );
+  </div>
+);
 }

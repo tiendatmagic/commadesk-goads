@@ -50,7 +50,7 @@ export default function NotFound() {
           Không Tìm Thấy Trang Yêu Cầu
         </h1>
         <p className="text-sm sm:text-base text-white/80 leading-relaxed mb-8 max-w-md">
-          Đường dẫn bạn truy cập có thể đã được đổi vị trí hoặc dịch vụ tạm thời không khả dụng trên hệ thống GOADS Portal.
+          Đường dẫn bạn truy cập có thể đã được đổi vị trí hoặc dịch vụ tạm thời không khả dụng trên hệ thống GOADS.
         </p>
 
         {/* Nút hành động */}
