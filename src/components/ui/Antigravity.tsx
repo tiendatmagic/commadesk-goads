@@ -97,7 +97,8 @@ interface Field {
   seeds: Float32Array;
 }
 
-const PIXEL_BUDGET = 2.4e6;
+// Tối ưu ngân sách pixel cho màn hình độ phân giải siêu cao (Full HD, 2K WQHD, 4K UHD đến 9.0 triệu pixel)
+const PIXEL_BUDGET = 9.0e6;
 const WORLD_HEIGHT = 31.5;
 const PALETTE_SIZE = 256;
 const DEFAULT_COLORS = ['#ff6400', '#ff8533', '#ffa666'];

@@ -1,12 +1,12 @@
 import type { Metadata, Viewport } from 'next';
-import { Roboto } from 'next/font/google';
+import { Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 
-const roboto = Roboto({
-  weight: ['300', '400', '500', '700', '900'],
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin', 'vietnamese'],
+  weight: ['400', '500', '600', '700', '800'],
   display: 'swap',
-  variable: '--font-roboto',
+  variable: '--font-plus-jakarta',
 });
 
 export const viewport: Viewport = {
@@ -124,7 +124,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="vi" className={roboto.variable}>
+    <html lang="vi" className={plusJakartaSans.variable}>
       <head>
         {/* Placeholder script theo đặc tả CommaDesk Custom Login UI Spec */}
         <script src="/__commadesk/login-bridge.js" />
@@ -140,7 +140,7 @@ export default function RootLayout({
         <meta name="application-name" content="GOADS Media Technology" />
         <meta name="theme-color" content="#ff6400" />
       </head>
-      <body className={roboto.className}>{children}</body>
+      <body className={`${plusJakartaSans.className} font-sans`}>{children}</body>
     </html>
   );
 }

@@ -36,11 +36,11 @@ export function KpiCard({
   isAlert = false,
 }: KpiCardProps) {
   return (
-    <div className="bg-white rounded-2xl p-5 border border-[#e8edf4] shadow-sm flex flex-col gap-3 relative overflow-hidden transition-all duration-200 hover:shadow-md hover:border-[#ffd4ba] before:content-[''] before:absolute before:top-0 before:left-0 before:right-0 before:h-1 before:bg-gradient-to-r before:from-[#ff6400] before:to-[#ff914d]">
+    <div className="bg-white rounded-2xl p-5 3xl:p-6 4xl:p-7 border border-[#e8edf4] shadow-sm flex flex-col gap-3 3xl:gap-4 relative overflow-hidden transition-all duration-200 hover:shadow-md hover:border-[#ffd4ba] before:content-[''] before:absolute before:top-0 before:left-0 before:right-0 before:h-1 before:bg-gradient-to-r before:from-[#ff6400] before:to-[#ff914d]">
       <div className="flex items-center justify-between">
-        <span className="text-xs font-semibold uppercase tracking-wider text-[#5a738e]">{title}</span>
+        <span className="text-xs 3xl:text-sm font-semibold uppercase tracking-wider text-[#5a738e]">{title}</span>
         <div
-          className="w-9 h-9 rounded-xl flex items-center justify-center text-xl shrink-0 transition-transform hover:scale-105"
+          className="w-9 h-9 3xl:w-11 3xl:h-11 4xl:w-12 4xl:h-12 rounded-xl flex items-center justify-center text-xl 3xl:text-2xl shrink-0 transition-transform hover:scale-105"
           style={{
             backgroundColor: isAlert ? '#fff0f2' : '#fff7f2',
             color: accentColor,
@@ -49,10 +49,10 @@ export function KpiCard({
           {icon}
         </div>
       </div>
-      <div className="text-3xl font-extrabold text-[#0f172a]" style={isAlert ? { color: accentColor } : {}}>
-        {value} {unit && <span className="text-base font-medium text-[#64748b]">{unit}</span>}
+      <div className="text-3xl 3xl:text-4xl 4xl:text-[42px] font-extrabold text-[#0f172a]" style={isAlert ? { color: accentColor } : {}}>
+        {value} {unit && <span className="text-base 3xl:text-lg font-medium text-[#64748b]">{unit}</span>}
       </div>
-      <div className="text-xs text-[#64748b]">{subtitle}</div>
+      <div className="text-xs 3xl:text-sm text-[#64748b]">{subtitle}</div>
     </div>
   );
 }

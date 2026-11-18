@@ -140,7 +140,7 @@ export function TableHead({
 }: TableHeadProps) {
   return (
     <th
-      className={`p-3.5 px-4 font-bold text-xs uppercase tracking-wider text-[#0f172a] align-middle ${
+      className={`p-3.5 px-4 3xl:p-4.5 3xl:px-5 font-bold text-xs 3xl:text-sm uppercase tracking-wider text-[#0f172a] align-middle ${
         nowrap ? 'whitespace-nowrap' : ''
       } ${className}`}
       {...props}
@@ -166,9 +166,9 @@ export function TableCell({
 }: TableCellProps) {
   return (
     <td
-      className={`p-3.5 px-4 align-middle text-sm text-[#0f172a] ${
+      className={`p-3.5 px-4 3xl:p-4.5 3xl:px-5 align-middle text-sm 3xl:text-base text-[#0f172a] ${
         nowrap ? 'whitespace-nowrap' : ''
-      } ${truncate ? 'truncate max-w-[280px]' : ''} ${className}`}
+      } ${truncate ? 'truncate max-w-[280px] 3xl:max-w-[420px]' : ''} ${className}`}
       {...props}
     >
       {children}

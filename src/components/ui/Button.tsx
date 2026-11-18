@@ -27,9 +27,9 @@ export function Button({
     'inline-flex items-center justify-center font-bold whitespace-nowrap shrink-0 transition-all cursor-pointer rounded-xl select-none disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none';
 
   const sizeStyles = {
-    sm: 'text-xs px-3 py-1.5 h-8 gap-1.5',
-    md: 'text-sm px-4 py-2.5 h-11 gap-2',
-    lg: 'text-[15px] px-5 py-3 h-[50px] gap-2 tracking-wide',
+    sm: 'text-xs 3xl:text-sm px-3 3xl:px-4 py-1.5 3xl:py-2 h-8 3xl:h-9 gap-1.5',
+    md: 'text-sm 3xl:text-base px-4 3xl:px-5 py-2.5 3xl:py-3 h-11 3xl:h-12 gap-2',
+    lg: 'text-[15px] 3xl:text-lg px-5 3xl:px-7 py-3 3xl:py-3.5 h-[50px] 3xl:h-[56px] gap-2 tracking-wide',
   }[size];
 
   const variantStyles = {
