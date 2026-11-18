@@ -235,16 +235,40 @@ export default function LoginForm() {
           </div>
         </div>
 
-        {/* Ghi nhớ & Quên mật khẩu */}
+        {/* Ghi nhớ & Quên mật khẩu - Checkbox Custom Đẹp Mắt Chuẩn Design System */}
         <div className="mt-4 3xl:mt-5 flex items-center justify-between text-xs sm:text-sm 3xl:text-base text-[#5C6570]">
-          <label className="flex items-center gap-2 cursor-pointer select-none">
-            <input
-              type="checkbox"
-              className="h-4 w-4 3xl:h-5 3xl:w-5 accent-[#FF6400] rounded cursor-pointer"
-              checked={rememberMe}
-              onChange={(e) => setRememberMe(e.target.checked)}
-            />
-            Ghi nhớ đăng nhập
+          <label className="group flex items-center gap-2.5 cursor-pointer select-none">
+            <div className="relative flex items-center justify-center">
+              <input
+                type="checkbox"
+                id="rememberMe"
+                name="rememberMe"
+                className="peer sr-only"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+              />
+              <div
+                className={`w-[18px] h-[18px] 3xl:w-5 3xl:h-5 rounded-md border flex items-center justify-center transition-all duration-200 ${
+                  rememberMe
+                    ? 'bg-[#FF6400] border-[#FF6400] text-white shadow-[0_2px_8px_rgba(255,100,0,0.35)]'
+                    : 'bg-white/85 border-[#CBD5E1] group-hover:border-[#FF6400]/70 group-hover:bg-white'
+                } peer-focus-visible:ring-2 peer-focus-visible:ring-[#FF6400]/30 peer-focus-visible:ring-offset-1`}
+              >
+                <svg
+                  className={`w-3 h-3 3xl:w-3.5 3xl:h-3.5 text-white transition-all duration-200 stroke-[3] ${
+                    rememberMe ? 'scale-100 opacity-100' : 'scale-50 opacity-0'
+                  }`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                </svg>
+              </div>
+            </div>
+            <span className="text-[#001C4C]/80 group-hover:text-[#001C4C] transition-colors font-medium">
+              Ghi nhớ đăng nhập
+            </span>
           </label>
           <span className="cursor-pointer hover:text-[#FF6400] transition-colors duration-150">Quên mật khẩu?</span>
         </div>
