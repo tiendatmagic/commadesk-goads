@@ -32,7 +32,7 @@ export default function GoadsShowcase() {
   }, []);
 
   return (
-    <div className="w-full max-w-[570px] 3xl:max-w-[660px] 4xl:max-w-[740px] 5xl:max-w-[840px] flex flex-col gap-4 3xl:gap-5 4xl:gap-6">
+    <div className="w-full max-w-[540px] min-[1400px]:max-w-[620px] min-[1600px]:max-w-[700px] min-[1800px]:max-w-[780px] min-[2100px]:max-w-[860px] min-[2400px]:max-w-[920px] min-[2800px]:max-w-[980px] min-[3200px]:max-w-[1060px] flex flex-col gap-4 min-[1600px]:gap-5 min-[2100px]:gap-6">
       {/* 1. TIÊU ĐỀ & MÔ TẢ (ĐÃ BỎ BADGE PHỦ RỘNG HIỆU QUẢ) */}
       <div>
         <h1 className="text-3xl xl:text-4xl 3xl:text-[44px] 4xl:text-[50px] 5xl:text-[58px] font-extrabold leading-[1.22] tracking-tight mb-2.5 3xl:mb-3.5 text-[#001C4C]">
@@ -46,7 +46,7 @@ export default function GoadsShowcase() {
 
       {/* 2. PHOTO SLIDER THỰC TẾ (CHỈ GIỮ BULLET SLIDER, BỎ HẾT TEXT & TAB) */}
       <div className="relative w-full rounded-2xl 4xl:rounded-3xl overflow-hidden bg-white/80 backdrop-blur-[8px] border border-white/90 shadow-[0_12px_36px_rgba(255,100,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.9)] p-2 3xl:p-2.5 4xl:p-3">
-        <div className="relative w-full h-[210px] 3xl:h-[260px] 4xl:h-[310px] 5xl:h-[360px] rounded-xl 4xl:rounded-2xl overflow-hidden bg-[#001C4C]/5">
+        <div className="relative w-full h-[210px] min-[1400px]:h-[240px] min-[1600px]:h-[270px] min-[1800px]:h-[300px] min-[2100px]:h-[330px] min-[2400px]:h-[360px] min-[2800px]:h-[400px] min-[3200px]:h-[440px] rounded-xl 4xl:rounded-2xl overflow-hidden bg-[#001C4C]/5">
           {SLIDES.map((slide, idx) => (
             <img
               key={slide.id}

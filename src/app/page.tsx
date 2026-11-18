@@ -43,15 +43,15 @@ export default function LoginPage() {
         }}
       />
 
-      {/* 3. BỐ CỤC 2 CỘT CÂN ĐỐI 50/50: Có wrapper co giãn cân đối tỷ lệ vàng trên màn hình Full HD, 2K & 4K */}
-      <div className="relative z-10 w-full min-h-screen grid grid-cols-1 min-[1200px]:grid-cols-2 items-center max-w-[1600px] 3xl:max-w-[1920px] 4xl:max-w-[2400px] 5xl:max-w-[2800px] mx-auto">
+      {/* 3. BỐ CỤC 2 CỘT CÂN ĐỐI 50/50: Wrapper mở rộng linh hoạt theo từng nấc màn hình lớn */}
+      <div className="relative z-10 w-full min-h-screen grid grid-cols-1 min-[1200px]:grid-cols-2 items-center gap-8 min-[1400px]:gap-10 min-[1600px]:gap-12 min-[1800px]:gap-14 min-[2100px]:gap-16 min-[2400px]:gap-20 max-w-[1500px] min-[1400px]:max-w-[1600px] min-[1600px]:max-w-[1760px] min-[1800px]:max-w-[1920px] min-[2100px]:max-w-[2150px] min-[2400px]:max-w-[2400px] min-[2800px]:max-w-[2700px] min-[3200px]:max-w-[3100px] mx-auto px-6 sm:px-8 md:px-10 min-[1600px]:px-12 min-[2100px]:px-16">
         {/* CỘT TRÁI: Showcase Hình Ảnh Chiến Dịch & Dịch Vụ Thực Tế Từ goads.vn */}
-        <div className="hidden min-[1200px]:flex flex-col justify-center items-end px-8 lg:px-12 xl:px-16 2xl:px-20 3xl:px-24 4xl:px-28 py-10 my-auto">
+        <div className="hidden min-[1200px]:flex flex-col justify-center items-end w-full py-8 my-auto">
           <GoadsShowcase />
         </div>
 
         {/* CỘT PHẢI: Form Đăng Nhập Dạng Card Nổi Đổ Bóng Sang Trọng Cân Đối */}
-        <div className="flex items-center justify-center min-[1200px]:justify-start px-4 py-8 sm:px-8 md:px-12 min-[1200px]:px-8 lg:px-12 xl:px-16 2xl:px-20 3xl:px-24 4xl:px-28">
+        <div className="flex items-center justify-center min-[1200px]:justify-start w-full py-8">
           <LoginForm />
         </div>
       </div>

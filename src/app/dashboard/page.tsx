@@ -128,27 +128,27 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-[#f7f9fc] flex flex-col text-[#0f172a]">
       {/* Top Navigation - Tối ưu tỷ lệ cân đối trên màn hình lớn 2K/4K */}
-      <header className="bg-[#090d16] text-white px-4 sm:px-6 lg:px-8 3xl:px-12 py-4 border-b-2 border-[#ff6400] sticky top-0 z-50 shadow-md">
-        <div className="w-full max-w-[1400px] 2xl:max-w-[1600px] 3xl:max-w-[2000px] 4xl:max-w-[2500px] 5xl:max-w-[3200px] mx-auto flex flex-wrap items-center justify-between gap-4">
+      <header className="bg-[#090d16] text-white px-4 sm:px-6 lg:px-8 min-[1800px]:px-12 min-[2400px]:px-16 py-4 min-[1800px]:py-5 min-[2400px]:py-6 border-b-2 border-[#ff6400] sticky top-0 z-50 shadow-md">
+        <div className="w-full max-w-[1500px] min-[1400px]:max-w-[1650px] min-[1600px]:max-w-[1800px] min-[1800px]:max-w-[1980px] min-[2100px]:max-w-[2200px] min-[2400px]:max-w-[2450px] min-[2800px]:max-w-[2750px] min-[3200px]:max-w-[3200px] mx-auto flex flex-wrap items-center justify-between gap-4 min-[1800px]:gap-6">
           <div className="flex items-center gap-3.5">
-            <div className="flex items-center gap-2.5 text-lg 3xl:text-xl font-extrabold tracking-tight">
-              <GoadsIcon size={26} className="drop-shadow-[0_0_8px_rgba(255,100,0,0.8)] 3xl:w-8 3xl:h-8" />
+            <div className="flex items-center gap-2.5 text-lg min-[1800px]:text-xl min-[2400px]:text-2xl font-extrabold tracking-tight">
+              <GoadsIcon size={26} className="drop-shadow-[0_0_8px_rgba(255,100,0,0.8)] min-[1800px]:w-8 min-[1800px]:h-8 min-[2400px]:w-9 min-[2400px]:h-9" />
               <span className="tracking-wide">GOADS MEDIA TECHNOLOGY</span>
             </div>
-            <Badge variant="neutral" className="hidden sm:inline-flex bg-white/10 text-white border-white/20 3xl:text-sm 3xl:px-3 3xl:py-1.5">
-              <AiCameraIcon size={14} className="text-[#ff7a1a] 3xl:w-4 3xl:h-4" />
+            <Badge variant="neutral" className="hidden sm:inline-flex bg-white/10 text-white border-white/20 min-[1800px]:text-sm min-[1800px]:px-3.5 min-[1800px]:py-1.5 min-[2400px]:text-base min-[2400px]:px-4 min-[2400px]:py-2">
+              <AiCameraIcon size={14} className="text-[#ff7a1a] min-[1800px]:w-4 min-[1800px]:h-4 min-[2400px]:w-5 min-[2400px]:h-5" />
               Trung Tâm Điều Hành Chiến Dịch OOH &amp; DOOH Toàn Quốc
             </Badge>
           </div>
 
-          <div className="flex items-center gap-4 3xl:gap-6 text-xs sm:text-sm 3xl:text-base">
-            <span className="hidden md:inline-flex items-center gap-1.5 text-[#ff7a1a] text-xs 3xl:text-sm font-medium before:content-[''] before:w-2 before:h-2 before:bg-[#ff6400] before:rounded-full before:shadow-[0_0_8px_#ff6400] before:animate-pulse">
+          <div className="flex items-center gap-4 min-[1800px]:gap-6 text-xs sm:text-sm min-[1800px]:text-base min-[2400px]:text-lg">
+            <span className="hidden md:inline-flex items-center gap-1.5 text-[#ff7a1a] text-xs min-[1800px]:text-sm min-[2400px]:text-base font-medium before:content-[''] before:w-2 before:h-2 before:bg-[#ff6400] before:rounded-full before:shadow-[0_0_8px_#ff6400] before:animate-pulse">
               Đội xe hoạt động: 99.8% Online
             </span>
             <div className="text-white/90">
               Kỹ sư vận hành: <strong>Đội Quản Trị Chiến Dịch</strong>
             </div>
-            <Button variant="danger" size="sm" onClick={handleLogout} className="3xl:text-sm 3xl:px-4 3xl:py-2">
+            <Button variant="danger" size="sm" onClick={handleLogout} className="min-[1800px]:text-sm min-[1800px]:px-4 min-[1800px]:py-2 min-[2400px]:text-base min-[2400px]:px-5 min-[2400px]:py-2.5">
               Đăng xuất
             </Button>
           </div>
@@ -156,26 +156,26 @@ export default function DashboardPage() {
       </header>
 
       {/* Main Content - Mở rộng tối ưu toàn diện cho màn hình 2K WQHD & 4K UHD */}
-      <main className="max-w-[1400px] 2xl:max-w-[1600px] 3xl:max-w-[2000px] 4xl:max-w-[2500px] 5xl:max-w-[3200px] w-full mx-auto p-4 sm:p-6 lg:p-8 3xl:p-10 4xl:p-12 5xl:p-14 flex flex-col gap-6 sm:gap-7 3xl:gap-8 4xl:gap-10">
+      <main className="max-w-[1500px] min-[1400px]:max-w-[1650px] min-[1600px]:max-w-[1800px] min-[1800px]:max-w-[1980px] min-[2100px]:max-w-[2200px] min-[2400px]:max-w-[2450px] min-[2800px]:max-w-[2750px] min-[3200px]:max-w-[3200px] w-full mx-auto p-4 sm:p-6 lg:p-8 min-[1800px]:p-10 min-[2400px]:p-12 min-[2800px]:p-14 flex flex-col gap-6 sm:gap-7 min-[1800px]:gap-8 min-[2400px]:gap-10">
         {/* Banner giới thiệu & Thông báo vận hành */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 3xl:gap-5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 min-[1800px]:gap-5">
           <div>
-            <h2 className="text-xl sm:text-2xl 3xl:text-3xl 4xl:text-[34px] 5xl:text-[40px] font-extrabold text-[#0f172a] tracking-tight mb-1 3xl:mb-2">
+            <h2 className="text-xl sm:text-2xl min-[1600px]:text-[28px] min-[1800px]:text-3xl min-[2100px]:text-[34px] min-[2400px]:text-[38px] font-extrabold text-[#0f172a] tracking-tight mb-1 min-[1800px]:mb-2">
               Bảng Điều Hành Mạng Lưới Quảng Cáo Ngoài Trời (OOH &amp; DOOH)
             </h2>
-            <p className="text-xs sm:text-sm 3xl:text-base 4xl:text-lg text-[#64748b]">
+            <p className="text-xs sm:text-sm min-[1800px]:text-base min-[2400px]:text-lg text-[#64748b]">
               Giám sát thời gian thực các trạm màn hình LED xe máy di động, đội xe Roadshow, lưu lượng tiếp cận và định vị hành trình GPS.
             </p>
           </div>
           <div>
-            <Badge variant="success" className="px-3.5 py-2 3xl:px-4 3xl:py-2.5 text-xs 3xl:text-sm">
+            <Badge variant="success" className="px-3.5 py-2 min-[1800px]:px-4 min-[1800px]:py-2.5 min-[2400px]:px-5 min-[2400px]:py-3 text-xs min-[1800px]:text-sm min-[2400px]:text-base">
               ✓ Hệ Thống Định Vị &amp; AI Camera: Hoạt động bình thường
             </Badge>
           </div>
         </div>
 
         {/* 4 Reusable KPI Grid Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 3xl:gap-6 4xl:gap-7">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 min-[1800px]:gap-6 min-[2400px]:gap-8">
           <KpiCard
             title="Màn Hình LED Xe Máy (DOOH)"
             value="1,280"
@@ -215,29 +215,29 @@ export default function DashboardPage() {
         </div>
 
         {/* Section Bảng Trạm Thiết Bị - Dùng Table Component Độc Lập */}
-        <Card className="p-4 sm:p-6 3xl:p-8 4xl:p-10 border-[#e8edf4]">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 3xl:gap-6 mb-5 3xl:mb-7">
+        <Card className="p-4 sm:p-6 min-[1800px]:p-8 min-[2400px]:p-10 border-[#e8edf4]">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 min-[1800px]:gap-6 mb-5 min-[1800px]:mb-7">
             <div className="min-w-0">
               <div className="flex items-center gap-2">
-                <ActivityIcon size={20} className="text-[#ff6400] shrink-0 3xl:w-6 3xl:h-6" />
-                <h3 className="text-base sm:text-lg 3xl:text-xl 4xl:text-2xl font-extrabold text-[#0f172a]">
+                <ActivityIcon size={20} className="text-[#ff6400] shrink-0 min-[1800px]:w-6 min-[1800px]:h-6 min-[2400px]:w-7 min-[2400px]:h-7" />
+                <h3 className="text-base sm:text-lg min-[1800px]:text-xl min-[2400px]:text-2xl font-extrabold text-[#0f172a]">
                   Danh Sách Phương Tiện &amp; Cụm Màn Hình Đang Hoạt Động
                 </h3>
               </div>
-              <p className="text-xs sm:text-sm 3xl:text-base text-[#64748b] mt-0.5 3xl:mt-1">
+              <p className="text-xs sm:text-sm min-[1800px]:text-base min-[2400px]:text-lg text-[#64748b] mt-0.5 min-[1800px]:mt-1">
                 Kiểm soát lộ trình GPS, số lượt tiếp cận người xem và tình trạng phát sóng quảng cáo thời gian thực
               </p>
             </div>
 
             <div className="flex items-center gap-2.5 shrink-0 flex-nowrap overflow-x-auto custom-scrollbar pb-1 sm:pb-0">
               {/* Nút lọc tab theo loại dịch vụ */}
-              <div className="flex items-center gap-1.5 bg-[#f0f4f9] p-1 3xl:p-1.5 rounded-xl border border-[#e2eaf4] shrink-0">
+              <div className="flex items-center gap-1.5 bg-[#f0f4f9] p-1 min-[1800px]:p-1.5 min-[2400px]:p-2 rounded-xl min-[2400px]:rounded-2xl border border-[#e2eaf4] shrink-0">
                 <Button
                   variant="tab"
                   size="sm"
                   isActive={activeTab === 'all'}
                   onClick={() => setActiveTab('all')}
-                  className="text-xs 3xl:text-sm px-3 3xl:px-4 py-1.5 3xl:py-2 h-8 3xl:h-9 whitespace-nowrap shrink-0"
+                  className="text-xs min-[1800px]:text-sm min-[2400px]:text-base px-3 min-[1800px]:px-4 min-[2400px]:px-5 py-1.5 min-[1800px]:py-2 min-[2400px]:py-2.5 h-8 min-[1800px]:h-10 min-[2400px]:h-11 whitespace-nowrap shrink-0"
                 >
                   Tất cả ({serviceNodes.length})
                 </Button>
@@ -246,7 +246,7 @@ export default function DashboardPage() {
                   size="sm"
                   isActive={activeTab === 'led'}
                   onClick={() => setActiveTab('led')}
-                  className="text-xs 3xl:text-sm px-3 3xl:px-4 py-1.5 3xl:py-2 h-8 3xl:h-9 whitespace-nowrap shrink-0"
+                  className="text-xs min-[1800px]:text-sm min-[2400px]:text-base px-3 min-[1800px]:px-4 min-[2400px]:px-5 py-1.5 min-[1800px]:py-2 min-[2400px]:py-2.5 h-8 min-[1800px]:h-10 min-[2400px]:h-11 whitespace-nowrap shrink-0"
                 >
                   Màn Hình LED Xe Máy
                 </Button>
@@ -255,7 +255,7 @@ export default function DashboardPage() {
                   size="sm"
                   isActive={activeTab === 'roadshow'}
                   onClick={() => setActiveTab('roadshow')}
-                  className="text-xs 3xl:text-sm px-3 3xl:px-4 py-1.5 3xl:py-2 h-8 3xl:h-9 whitespace-nowrap shrink-0"
+                  className="text-xs min-[1800px]:text-sm min-[2400px]:text-base px-3 min-[1800px]:px-4 min-[2400px]:px-5 py-1.5 min-[1800px]:py-2 min-[2400px]:py-2.5 h-8 min-[1800px]:h-10 min-[2400px]:h-11 whitespace-nowrap shrink-0"
                 >
                   Roadshow &amp; 4 Bánh
                 </Button>
@@ -377,13 +377,13 @@ export default function DashboardPage() {
             <Table minWidth="min-w-[1150px]" showScrollHint={true}>
               <TableHeader>
                 <TableRow>
-                  <TableHead nowrap={true} className="min-w-[150px]">Mã Điểm / Xe</TableHead>
-                  <TableHead nowrap={true} className="min-w-[300px]">Tuyến Đường &amp; Dịch Vụ</TableHead>
-                  <TableHead nowrap={true} className="min-w-[170px]">Lượt Tiếp Cận (AI)</TableHead>
-                  <TableHead nowrap={true} className="min-w-[240px]">Trạng Thái Kỹ Thuật</TableHead>
-                  <TableHead nowrap={true} className="min-w-[180px]">Kỹ Sư Phụ Trách</TableHead>
-                  <TableHead nowrap={true} className="min-w-[140px]">Thời Gian</TableHead>
-                  <TableHead nowrap={true} className="min-w-[190px]">Trạng Thái</TableHead>
+                  <TableHead nowrap={true} className="min-w-[150px] min-[1800px]:text-sm min-[2400px]:text-base min-[1800px]:py-4 min-[2400px]:py-5">Mã Điểm / Xe</TableHead>
+                  <TableHead nowrap={true} className="min-w-[300px] min-[1800px]:text-sm min-[2400px]:text-base min-[1800px]:py-4 min-[2400px]:py-5">Tuyến Đường &amp; Dịch Vụ</TableHead>
+                  <TableHead nowrap={true} className="min-w-[170px] min-[1800px]:text-sm min-[2400px]:text-base min-[1800px]:py-4 min-[2400px]:py-5">Lượt Tiếp Cận (AI)</TableHead>
+                  <TableHead nowrap={true} className="min-w-[240px] min-[1800px]:text-sm min-[2400px]:text-base min-[1800px]:py-4 min-[2400px]:py-5">Trạng Thái Kỹ Thuật</TableHead>
+                  <TableHead nowrap={true} className="min-w-[180px] min-[1800px]:text-sm min-[2400px]:text-base min-[1800px]:py-4 min-[2400px]:py-5">Kỹ Sư Phụ Trách</TableHead>
+                  <TableHead nowrap={true} className="min-w-[140px] min-[1800px]:text-sm min-[2400px]:text-base min-[1800px]:py-4 min-[2400px]:py-5">Thời Gian</TableHead>
+                  <TableHead nowrap={true} className="min-w-[190px] min-[1800px]:text-sm min-[2400px]:text-base min-[1800px]:py-4 min-[2400px]:py-5">Trạng Thái</TableHead>
                 </TableRow>
               </TableHeader>
 
@@ -398,19 +398,19 @@ export default function DashboardPage() {
                   filteredNodes.map((node) => (
                     <TableRow key={node.id}>
                       <TableCell nowrap={true}>
-                        <div className="font-bold text-[#001c4c] whitespace-nowrap">{node.id}</div>
-                        <div className="text-xs text-[#5a738e] font-mono whitespace-nowrap">{node.code}</div>
+                        <div className="font-bold text-[#001c4c] whitespace-nowrap min-[1800px]:text-base min-[2400px]:text-lg">{node.id}</div>
+                        <div className="text-xs min-[1800px]:text-sm min-[2400px]:text-base text-[#5a738e] font-mono whitespace-nowrap">{node.code}</div>
                       </TableCell>
 
-                      <TableCell nowrap={true} className="max-w-[320px] 3xl:max-w-[500px] 4xl:max-w-[700px]">
+                      <TableCell nowrap={true} className="max-w-[320px] min-[1800px]:max-w-[500px] min-[2400px]:max-w-[700px]">
                         <div
-                          className="font-semibold text-[#001c4c] whitespace-nowrap truncate"
+                          className="font-semibold text-[#001c4c] whitespace-nowrap truncate min-[1800px]:text-base min-[2400px]:text-lg"
                           title={node.location}
                         >
                           {node.location}
                         </div>
                         <div
-                          className={`text-xs 3xl:text-sm font-medium mt-0.5 whitespace-nowrap ${
+                          className={`text-xs min-[1800px]:text-sm min-[2400px]:text-base font-medium mt-0.5 whitespace-nowrap ${
                             node.serviceType === 'led' ? 'text-[#ff6400]' : 'text-[#b45309]'
                           }`}
                         >
@@ -419,23 +419,23 @@ export default function DashboardPage() {
                       </TableCell>
 
                       <TableCell nowrap={true}>
-                        <span className="font-extrabold text-[15px] 3xl:text-lg 4xl:text-xl text-[#ff6400] whitespace-nowrap">
+                        <span className="font-extrabold text-[15px] min-[1800px]:text-lg min-[2400px]:text-xl text-[#ff6400] whitespace-nowrap">
                           {node.metrics}
                         </span>
                       </TableCell>
 
-                      <TableCell nowrap={true} className="max-w-[250px] 3xl:max-w-[400px] 4xl:max-w-[550px]">
+                      <TableCell nowrap={true} className="max-w-[250px] min-[1800px]:max-w-[400px] min-[2400px]:max-w-[550px]">
                         <span
-                          className="text-[#001c4c] 3xl:text-base whitespace-nowrap truncate block"
+                          className="text-[#001c4c] min-[1800px]:text-base min-[2400px]:text-lg whitespace-nowrap truncate block"
                           title={node.bandwidth}
                         >
                           {node.bandwidth}
                         </span>
                       </TableCell>
 
-                      <TableCell nowrap={true} className="max-w-[190px] 3xl:max-w-[280px] 4xl:max-w-[360px]">
+                      <TableCell nowrap={true} className="max-w-[190px] min-[1800px]:max-w-[280px] min-[2400px]:max-w-[360px]">
                         <span
-                          className="font-medium text-[#001c4c] 3xl:text-base whitespace-nowrap truncate block"
+                          className="font-medium text-[#001c4c] min-[1800px]:text-base min-[2400px]:text-lg whitespace-nowrap truncate block"
                           title={node.technician}
                         >
                           {node.technician}
@@ -443,7 +443,7 @@ export default function DashboardPage() {
                       </TableCell>
 
                       <TableCell nowrap={true}>
-                        <span className="text-[#5a738e] text-xs 3xl:text-sm whitespace-nowrap">
+                        <span className="text-[#5a738e] text-xs min-[1800px]:text-sm min-[2400px]:text-base whitespace-nowrap">
                           {node.time}
                         </span>
                       </TableCell>
@@ -457,7 +457,7 @@ export default function DashboardPage() {
                               ? 'warning'
                               : 'info'
                           }
-                          className="whitespace-nowrap 3xl:text-sm 3xl:px-3 3xl:py-1"
+                          className="whitespace-nowrap min-[1800px]:text-sm min-[1800px]:px-3.5 min-[1800px]:py-1.5 min-[2400px]:text-base min-[2400px]:px-4 min-[2400px]:py-2"
                         >
                           {node.statusText}
                         </Badge>
@@ -471,16 +471,16 @@ export default function DashboardPage() {
         </Card>
 
         {/* Section Cảnh báo & Hỗ trợ kỹ thuật */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 3xl:gap-7">
-          <Card className="border-[#e8edf4] p-5 sm:p-6 3xl:p-8 4xl:p-10">
-            <h4 className="text-base 3xl:text-xl 4xl:text-2xl font-bold text-[#001c4c] mb-3 3xl:mb-4 flex items-center gap-2">
-              <ShieldCheckIcon size={20} className="text-[#ff6400] 3xl:w-6 3xl:h-6" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 min-[1800px]:gap-7 min-[2400px]:gap-8">
+          <Card className="border-[#e8edf4] p-5 sm:p-6 min-[1800px]:p-8 min-[2400px]:p-10">
+            <h4 className="text-base min-[1800px]:text-xl min-[2400px]:text-2xl font-bold text-[#001c4c] mb-3 min-[1800px]:mb-4 flex items-center gap-2">
+              <ShieldCheckIcon size={20} className="text-[#ff6400] min-[1800px]:w-6 min-[1800px]:h-6 min-[2400px]:w-7 min-[2400px]:h-7" />
               Tiêu Chuẩn Giám Sát Chiến Dịch &amp; Đo Lường AI Camera
             </h4>
-            <p className="text-xs sm:text-sm 3xl:text-base 4xl:text-lg text-[#5a738e] leading-relaxed mb-4 3xl:mb-5">
+            <p className="text-xs sm:text-sm min-[1800px]:text-base min-[2400px]:text-lg text-[#5a738e] leading-relaxed mb-4 min-[1800px]:mb-5">
               Toàn bộ dữ liệu hành trình GPS, số lượt người tiếp cận và spot phát sóng màn hình LED được mã hóa và xác thực thời gian thực, đảm bảo tính minh bạch tuyệt đối cho đối tác Nhãn hàng.
             </p>
-            <div className="bg-[#f0f4f9] p-3 3xl:p-4 rounded-xl text-xs sm:text-sm 3xl:text-base border border-[#e2eaf4]">
+            <div className="bg-[#f0f4f9] p-3 min-[1800px]:p-4 min-[2400px]:p-5 rounded-xl text-xs sm:text-sm min-[1800px]:text-base min-[2400px]:text-lg border border-[#e2eaf4]">
               <strong>Nền tảng báo cáo tự động hóa:</strong>{' '}
               <code className="bg-white px-1.5 py-0.5 rounded border border-[#e2eaf4] font-mono text-[#ff6400] font-bold">
                 GOADS AI Live Analytics v2.6 (DOOH Certified)
@@ -488,20 +488,20 @@ export default function DashboardPage() {
             </div>
           </Card>
 
-          <Card className="border-[#e8edf4] p-5 sm:p-6 3xl:p-8 4xl:p-10">
-            <h4 className="text-base 3xl:text-xl 4xl:text-2xl font-bold text-[#001c4c] mb-3 3xl:mb-4 flex items-center gap-2">
-              <AlertCircleIcon size={20} className="text-[#ff6400] 3xl:w-6 3xl:h-6" />
+          <Card className="border-[#e8edf4] p-5 sm:p-6 min-[1800px]:p-8 min-[2400px]:p-10">
+            <h4 className="text-base min-[1800px]:text-xl min-[2400px]:text-2xl font-bold text-[#001c4c] mb-3 min-[1800px]:mb-4 flex items-center gap-2">
+              <AlertCircleIcon size={20} className="text-[#ff6400] min-[1800px]:w-6 min-[1800px]:h-6 min-[2400px]:w-7 min-[2400px]:h-7" />
               Trung Tâm Trực Ban Hỗ Trợ Chiến Dịch GOADS 24/7
             </h4>
-            <p className="text-xs sm:text-sm 3xl:text-base 4xl:text-lg text-[#5a738e] leading-relaxed mb-4 3xl:mb-5">
+            <p className="text-xs sm:text-sm min-[1800px]:text-base min-[2400px]:text-lg text-[#5a738e] leading-relaxed mb-4 min-[1800px]:mb-5">
               Mọi sự cố về điều phối lộ trình đoàn xe, hiệu chỉnh spot nội dung màn hình LED hoặc yêu cầu trích xuất dữ liệu đo lường, vui lòng liên hệ bộ phận hỗ trợ kỹ thuật trực ban.
             </p>
-            <div className="flex flex-wrap items-center gap-2 text-sm 3xl:text-base 4xl:text-lg font-bold text-[#001c4c]">
+            <div className="flex flex-wrap items-center gap-2 text-sm min-[1800px]:text-base min-[2400px]:text-lg font-bold text-[#001c4c]">
               <span>📞 Hotline Kỹ Thuật:</span>
               <a href="tel:0945318968" className="text-[#ff6400] underline hover:text-[#e65a00]">
                 094 531 89 68
               </a>
-              <span className="text-xs 3xl:text-sm font-normal text-[#5a738e]">(Info@goads.vn)</span>
+              <span className="text-xs min-[1800px]:text-sm min-[2400px]:text-base font-normal text-[#5a738e]">(Info@goads.vn)</span>
             </div>
           </Card>
         </div>
